@@ -5,9 +5,11 @@ import React, { Fragment } from 'react'
 
 export default props => (
     <Fragment>
-        <Header />
-        <main className="content">
-            Conteúdo
+        <Header {...props}/>
+        <main className="content container-fluid">
+            <div className="p-3 mt-3">
+                {props.children}
+            </div>
         </main>
     </Fragment>
 )
