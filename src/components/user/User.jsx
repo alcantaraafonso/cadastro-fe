@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 
 
 import Main from '../template/Main'
+import { getList } from './UserAction'
 
 const headerProps = {
     icon: 'users',
@@ -11,7 +12,11 @@ const headerProps = {
     subtitle: 'CRUD de usuário'
 }
 
-export default class User extends Component {
+class User extends Component {
+
+    componentWillMount() {
+        this.props.getList()
+    }
     
     render() {
         return (
@@ -22,3 +27,14 @@ export default class User extends Component {
 
     }
 }
+
+const mapStateToProps = state => ({
+    user: state.user,
+    list: state.list
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+    getList
+}, dispatch)
+
+export default connect(mapStateToProps, mapDispatchToProps)(User)
