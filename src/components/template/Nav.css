@@ -9,8 +9,8 @@ aside.menu-area {
     display: block;
     text-decoration: none;
     color: #fff;
-    padding: 15px;
     font-weight: 300;
+    padding: 15px;
 }
 
 .menu a:hover {
