@@ -4,8 +4,8 @@ import { Provider } from 'react-redux'
 import { applyMiddleware, createStore } from 'redux'
 
 import promise from 'redux-promise'; //Usado para garantir a promessa de uma chamada assíncrona
-import multi from 'redux-multi'; //Usado para chamar outra action a partir de uma em execução
 import thunk from 'redux-thunk'; //Usado para sequenciar as chamadas das actions
+import multi from 'redux-multi'; //Usado para chamar outra action a partir de uma em execução
 
 import App from './main/App';
 import * as serviceWorker from './serviceWorker';
