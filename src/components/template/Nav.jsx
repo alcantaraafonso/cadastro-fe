@@ -7,7 +7,7 @@ export default props => (
     <aside className="menu-area">
         <nav className="menu">
             <NavItem path="/" icon="home" label="Início" />
-            <NavItem path="/users" icon="users" label="Usuários" />
+            <NavItem path="/users-crud" icon="users" label="Usuários" />
         </nav>
     </aside>
 )

@@ -19,16 +19,16 @@ const headerProps = {
 
 class User extends Component {
 
-    componentWillMount() {
+    componentDidMount() {
         //Deve-se iniciar o formulário de de usá-lo.
         //Esta action chama o método initialize do Redux-Form
         this.props.init()
     }
 
     renderForm() {
-        const { save, clearForm } = this.props
+        const { save, init } = this.props
         return (
-            <form onSubmit={save}>
+            <form role='form' onSubmit={save}>
                 <div className="form">
                     <div className="row">
                         <div className="col-12 col-md-6">
