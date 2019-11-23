@@ -2,9 +2,14 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
+import { reduxForm, Field, formValueSelector } from 'redux-form'
+
 
 import Main from '../template/Main'
-import { search, save, updateUserName, updateUserEmail,clearForm } from './UserAction'
+import LabelAndInput from '../form/LabelAndInput'
+import Button from '../elements/Button'
+import { USER_FORM } from '../../utils/Consts'
+import { save, init } from './UserAction'
 
 const headerProps = {
     icon: 'users',
@@ -15,45 +20,40 @@ const headerProps = {
 class User extends Component {
 
     componentWillMount() {
-        this.props.search()
+        //Deve-se iniciar o formulário de de usá-lo.
+        //Esta action chama o método initialize do Redux-Form
+        this.props.init()
     }
 
     renderForm() {
-        const { name, email, save, updateUserName, updateUserEmail, clearForm } = this.props
+        const { save, clearForm } = this.props
         return (
-            <div className="form">
-                <div className="row">
-                    <div className="col-12 col-md-6">
-                        <div className="form-group">
-                            <label>Nome</label>
-                            <input text="text" className="form-control" name="name"
-                                value={name}
-                                onChange={e => updateUserName(e) } 
-                                placeholder="Digite o nome"/>
+            <form onSubmit={save}>
+                <div className="form">
+                    <div className="row">
+                        <div className="col-12 col-md-6">
+                            <div className="form-group">
+                                <Field name='name' component={LabelAndInput} 
+                                    label='Nome' placeholder='Digite o nome...' />
+                            </div>
+                        </div>
+                        <div className="col-12 col-md-6">
+                            <div className="form-group">
+                                <Field name='email' component={LabelAndInput} 
+                                    label='Email' placeholder='Digite o Email...' />
+                            </div>
                         </div>
                     </div>
-                    <div className="col-12 col-md-6">
-                        <div className="form-group">
-                            <label>Email</label>
-                            <input text="text" className="form-control" name="email"
-                                value={email}
-                                onChange={e => updateUserEmail(e) } 
-                                placeholder="Digite o email"/>
+                    <hr />
+                    <div className="row">
+                        <div className="col-12 d-flex justify-content-end">
+                            <Button type='submit' buttonClass='primary' label='Salvar' />
+          
+                            <Button type='button' buttonClass='secondary ml-2' label='Cancelar' handleClick={init}/>
                         </div>
                     </div>
                 </div>
-                <hr />
-                <div className="row">
-                    <div className="col-12 d-flex justify-content-end">
-                        <button className="btn btn-primary" onClick={() => save(name, email)}>
-                            Salvar
-                        </button>
-                        <button className="btn btn-secondary ml-2" onClick={() => clearForm()}>
-                            Cancelar
-                        </button>
-                    </div>
-                </div>
-            </div>
+            </form>
         )
     }
     
@@ -67,18 +67,23 @@ class User extends Component {
     }
 }
 
+/**
+ * Decorando com o Redux-Form
+ */
+User = reduxForm({form: USER_FORM, destroyOnUnmount: false})(User)
+
+/**
+ * O formValueSelector pega a propriedade values do form (que tá no state)
+ */
+const selector = formValueSelector(USER_FORM)
+
 const mapStateToProps = state => ({
-    name: state.name,
-    email: state.email,
-    list: state.list
+    user: selector(state, 'user')
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-    search,
-    save,
-    updateUserName,
-    updateUserEmail,
-    clearForm
+    init,
+    save
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(User)

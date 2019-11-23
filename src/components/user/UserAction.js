@@ -1,6 +1,11 @@
 import axios from 'axios'
 
-const BASE_URL = 'http://localhost:3003/api/user'
+import { toastr } from 'react-redux-toastr'
+
+//ActionCreator do Redux-Form
+import { initialize } from 'redux-form'
+
+import { BASE_URL, INITIAL_VALUES_FORM, USER_FORM } from '../../utils/Consts'
 
 export function search() {
 
@@ -13,35 +18,35 @@ export function search() {
     }
 }
 
-export function save(name, email) {
-    const user = { name, email }
-    // const method = user.id ? 'put' : 'post'
-    // const url = user.id ? `${BASE_URL}/${user.id}` : BASE_URL
-    return dispatch => {
-        axios.post(BASE_URL, { user })
-            .then(resp => dispatch(clearForm()) )
-            .then(resp => dispatch(search()) )
-    }
-}
+export function save(values, methodHttp = 'post') {
+     //O redux thunk necessita que se retorne uma função
+     return dispatch => {
+        const id = values._id ? values._id : ''
 
+        axios.post(`${BASE_URL}/${id}`, values)
+            .then(response => {
+                toastr.success('Sucesso', 'Operação realizada com sucesso.')
+                //originalmente o dispatch recebe uma action, mas como é usado o middleware multi,
+                //é possível passar um array e chamar várias Actions
+                dispatch(init())
+            })
+            .catch(e => {
+                console.log(e)
+                e.response.data.errors.forEach(
+                    error => toastr.error('Erro', error)
+                    // error => console.log(error)
+                )
+            })
 
-export function updateUserName(event) {
-    return {
-        type: 'USER_NAME_CHANGED',
-        payload: event.target.value
-    }
-}
-
-export function updateUserEmail(event) {
-    return {
-        type: 'USER_EMAIL_CHANGED',
-        payload: event.target.value
     }
 }
 
 /**
  * usando o middleware multi para chamar mais de uma action
  */
-export const clearForm = () => ([
-    { type: 'CLEAR_FORM', payload: '' }, search()]
-)
+export function init() { 
+    return [
+        search(),
+        initialize(USER_FORM, INITIAL_VALUES_FORM)
+    ]
+}
