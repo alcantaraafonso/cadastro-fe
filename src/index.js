@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import { applyMiddleware, createStore } from 'redux'
 
 import promise from 'redux-promise'; //Usado para garantir a promessa de uma chamada assíncrona
-// import thunk from 'redux-thunk'; //Usado para sequenciar as chamadas das actions
+import thunk from 'redux-thunk'; //Usado para sequenciar as chamadas das actions
 import multi from 'redux-multi'; //Usado para chamar outra action a partir de uma em execução
 
 import App from './main/App';
@@ -17,7 +17,7 @@ const devTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_
 /**
  * Aplicando o middleware para que e assim garantindo o retorno de operações baseadas em promessas
  */
-const store = applyMiddleware(multi, promise)(createStore)(rootReducer, devTools);
+const store = applyMiddleware(multi, thunk, promise)(createStore)(rootReducer, devTools);
 
 
 ReactDOM.render(

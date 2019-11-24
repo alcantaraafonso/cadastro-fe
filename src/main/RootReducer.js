@@ -7,7 +7,7 @@ import { reducer as toastrReducer} from 'react-redux-toastr'
 import userReducer from '../components/user/UserReducer'
 
 const rootReducer = combineReducers({
-    user: userReducer,
+    users: userReducer,
     form: formReducer,
     toastr: toastrReducer
 })
