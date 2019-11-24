@@ -24,9 +24,9 @@ class User extends Component {
     render() {
         return (
             <Main {...headerProps}>
-                <List />
-                <hr />
                 <Form onSubmit={this.props.create} />
+
+                <List />
             </Main>
         )
 
