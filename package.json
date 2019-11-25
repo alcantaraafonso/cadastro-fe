@@ -25,6 +25,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "deploy": "aws s3 cp --recursive ./build s3://user-app.com.br",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
