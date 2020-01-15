@@ -8,11 +8,12 @@
     "font-awesome": "4.7.0",
     "ionicons": "4.4.3",
     "jquery": "3.4.1",
+    "nvm": "0.0.4",
     "react": "16.12.0",
     "react-dom": "16.12.0",
     "react-redux": "5.0.7",
-    "react-router": "4.3.1",
     "react-redux-toastr": "7.4.0",
+    "react-router": "4.3.1",
     "react-router-dom": "4.3.1",
     "react-scripts": "3.2.0",
     "redux": "4.0.0",
@@ -25,7 +26,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "deploy": "aws s3 cp --recursive ./build s3://user-app.com.br",
+    "deploy": "aws s3 cp --recursive ./build s3://cadastro-user-app",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

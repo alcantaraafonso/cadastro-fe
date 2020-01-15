@@ -29,9 +29,9 @@ function submit(values, methodHttp) {
             })
             .catch(e => {
                 e.response.data.errors.forEach(
-                    error => toastr.error('Erro', error)
+                       error => toastr.error('Erro', error)
                 )
-
+                
             })
 
     }
