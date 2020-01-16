@@ -1,6 +1,6 @@
-# ****************************************************************************************************
+### *********************************************
 ## O que é
-Esta é uam aplicação simples que faz CRUD de usuários.
+Esta é uma aplicação simples que faz CRUD de usuários.
 
 ## Tecs
 Este projeto foi desenvolvido com React 16. Faz uso do axios para chamada do Backend e utiliza Redux e Redux Form para controle do state e do form.
@@ -12,7 +12,7 @@ O todo o projeto está disponível na AWS, o fron-end foi disponibilizado em um 
 A aplicação está disponibilizada em:
 http://br.com.cadastro-usuario.s3-website-sa-east-1.amazonaws.com/
 
-# ****************************************************************************************************
+### ***************************************
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
